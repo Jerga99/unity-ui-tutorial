@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour
             }
             return m_Instance;
         }
+
+
     }
 
     private void Awake()
@@ -38,8 +40,15 @@ public class AudioManager : MonoBehaviour
         PlayBgMusic(m_BgMusic);
     }
 
+    public void SetMusicVolume(float volume)
+    {
+        m_AudioSource.volume = volume;
+    }
+
     private void PlayBgMusic(AudioClip bgMusic)
     {
+        float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        m_AudioSource.volume = volume;
         m_AudioSource.clip = bgMusic;
         m_AudioSource.loop = true;
         m_AudioSource.Play();
@@ -47,6 +56,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayButtonClickSound()
     {
-        m_AudioSource.PlayOneShot(m_ClickSound);
+        float volume = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
+        m_AudioSource.PlayOneShot(m_ClickSound, volume);
     }
 }
