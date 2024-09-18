@@ -8,6 +8,7 @@ public class NavigationButton : ActionButton
 
     public override void OnClick()
     {
+        AudioManager.Instance.PlayButtonClickSound();
         m_ScreenManager.NavigateTo(m_SceneName);
     }
 }
